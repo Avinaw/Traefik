@@ -1,0 +1,37 @@
+defaultEntryPoints = ["http"]
+
+[api]
+    dashboard = true
+    insecure  = true
+    
+[entryPoints.ping]
+    address = ":8082"
+
+[ping]
+  entryPoint = "ping"
+
+[entryPoints]    
+    [entryPoints.http]
+        address = ":8888"
+
+#[web]
+#address = ":8080"
+
+[providers]
+  # Enable the file provider to define routers / middlewares / services in file
+  [providers.file]
+   Directory = "C:\\rename"
+   watch = true
+###############################################################
+# Log Configuration
+###############################################################
+
+
+[accessLog]
+  filePath = "C:\\Users\\avinaw.sharma\\Desktop\\New folder\\access.log"
+  format = "json"
+
+[log]
+  level = "INFO"
+  filePath = "C:\\Users\\avinaw.sharma\\Desktop\\New folder\\Traefik.log"
+  format   = "json"

@@ -1,0 +1,29 @@
+[http]
+   
+# Create router for http
+    [http.routers.my-routers]
+        entryPoints = ["http"]
+        service = "service-http"
+        #rule = "PathPrefix('/')" 
+        rule = "Path(`/`)"
+
+## create service
+    [http.services]
+       [http.services.service-http.loadBalancer]
+        [http.services.my-service.loadBalancer.sticky.cookie]
+            name = "my_sticky_cookie"
+            secure = true
+            httpOnly = true
+            sameSite = "none" 
+         
+        [http.services.healthcheck.loadBalancer.healthCheck]
+            path = "/health"
+            interval = "10s"
+            timeout = "3s"
+
+
+           [[http.services.service-http.loadBalancer.servers]]
+               url = "http://10.1.160.106/"
+           [[http.services.service-http.loadBalancer.servers]]
+               url = "http://10.1.160.124/"
+
